@@ -3,36 +3,67 @@
 @tailwind utilities;
 
 :root {
-  --background-color: rgba(247, 248, 251, 1);
-  --text-color: rgba(0, 32, 51, 1);
-  --line-color: rgba(0, 32, 51, .05);
+    --background-color: rgba(247, 248, 251, 1);
+    --background-color-alt: rgb(234, 234, 234);
+    --text-color: rgba(0, 32, 51, 0.75);
+    --line-color: rgba(0, 32, 51, .05);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: rgba(57, 57, 61, 1);
-    --text-color: rgba(255, 255, 255, 0.8);
-    --line-color: rgba(255, 255, 255, 0.025);
-  }
+    :root {
+        --background-color: rgba(57, 57, 61, 1);
+        --background-color-alt: rgb(103, 103, 110);
+        --text-color: rgba(255, 255, 255, 0.5);
+        --line-color: rgba(255, 255, 255, 0.025);
+    }
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-  background-color: var(--background-color);
-  color: var(--text-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 #root {
-  display: contents;
+    display: contents;
+}
+
+input[type="number"] {
+    appearance: none;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+@layer components {
+
+    .text-gradient {
+        @apply bg-[linear-gradient(to_right,orange,violet)];
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .button {
+        @apply px-3 py-1 border border-[var(--line-color)] rounded-xl shadow;
+    }
+
+    .input {
+        @apply rounded py-1 px-2;
+        @apply bg-[var(--background-color-alt)];
+        @apply focus:shadow-inner focus:outline-none;
+    }
+
 }
