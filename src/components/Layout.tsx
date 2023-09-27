@@ -1,9 +1,8 @@
 import cx from "../helpers/cx"
-import { FormEvent, useCallback, useEffect, useState } from "react"
+import { useCallback, useState } from "react"
 import { AddForm } from "./AddForm"
 import { Header } from "./Header"
 import { fetch } from "../helpers/fetch"
-import { Simulate } from "react-dom/test-utils"
 import { sumDecorator } from "../helpers/sumDecorator"
 import { gridRowClassNames, Row } from "./Row"
 
