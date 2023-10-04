@@ -8,8 +8,7 @@ export function sumDecorator(value: number) {
             <strong>{a}</strong>
             {","}
             <span>{b}</span>
-            {" "}
-            {`${moneySymbol}`}
+            {moneySymbol}
         </>
     )
 }

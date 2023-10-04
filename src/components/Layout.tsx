@@ -97,7 +97,7 @@ export function Layout() {
             )}
 
             {!addFormVisible && !loading && data.length > 0 && (
-                <div className="p-2">
+                <div className={cx("px-2 py-5", commonClassName, "text-right")}>
                     <button type="button" className="button" onClick={function ShowAddForm() {
                         setAddFormVisible(true)
                     }}>
@@ -115,8 +115,9 @@ export function Layout() {
             {!loading && (
                 <footer className={cx(
                     "sticky bottom-0 bg-[var(--background-color)]",
-                    "px-4 py-2 border-t border-[var(--line-color)] [&:first-child]:border-0",
+                    "px-4 p-2 border-t border-[var(--line-color)] [&:first-child]:border-0",
                     gridRowClassNames,
+                    commonClassName,
                 )}>
                     <strong className="text-xl">Всего:</strong>
                     {" "}

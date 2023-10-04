@@ -70,16 +70,16 @@ export function Row({ id, title, sum }: RowProps) {
                     {sumDecorator(sum)}
                 </code>
                 <div className="flex [&>*]:w-1/2">
-                    <button onClick={function DeleteItem() {
+                    <button title="Редактор" onClick={function EditItem() {
                     }}>
-                        E
+                        Р
                     </button>
                     <button onClick={function DeleteItem() {
                     }}>
                         X
                     </button>
                 </div>
-                {!!(dragging && hoveredId !== id) && (
+                {(dragging && hoveredId !== id) && (
                     <>
                         <div className="absolute left-0 right-0 top-0 h-1/2 bg-red-500/30"
                             onDrop={function () {

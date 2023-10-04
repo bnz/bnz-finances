@@ -6,7 +6,7 @@ export function Header() {
         <header className={cx("sticky top-0 select-none text-center bg-[var(--background-color)] shadow h-14", commonClassName)}>
             <h1 className="relative h-14">
                     <span className="text-gradient font-thin text-3xl">
-                        Ю.<span className="text-xl ">и</span>.Ю
+                        Ю. <span className="text-xl ">и</span> Ю.
                     </span>
                 <span className={cx(
                     "text-gradient",

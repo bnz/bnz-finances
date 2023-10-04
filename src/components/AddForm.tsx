@@ -1,6 +1,7 @@
 import { FormEvent, useCallback, useState } from "react"
-import { DataItem } from "./Layout"
+import { commonClassName, DataItem } from "./Layout"
 import { makeId } from "../helpers/makeId"
+import cx from "../helpers/cx"
 
 interface AddFormProps {
     setData(item: DataItem): void
@@ -17,7 +18,7 @@ export function AddForm({ setData, onCancel }: AddFormProps) {
 
     return (
         <>
-            <form className="p-5 flex gap-3" onSubmit={onSubmit}>
+            <form className={cx("p-5 flex md:justify-end flex-col md:flex-row gap-3", commonClassName)} onSubmit={onSubmit}>
                 <input type="text" className="input" placeholder="название"
                     autoFocus
                     required
