@@ -1,15 +1,24 @@
-import React from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
 import { Layout } from "./components/Layout"
+// import { Dnd } from "./components/dnd/Dnd"
+// import { DndProvider } from 'react-dnd'
+// import { HTML5Backend } from 'react-dnd-html5-backend'
+
 
 createRoot(
     document.getElementById('root') as HTMLElement,
 ).render(
-    <React.StrictMode>
+    <StrictMode>
         <Layout />
-    </React.StrictMode>,
+        {/*<DndProvider backend={HTML5Backend}>*/}
+        {/*    <div className="p-5">*/}
+        {/*        <Dnd />*/}
+        {/*    </div>*/}
+        {/*</DndProvider>*/}
+    </StrictMode>,
 )
 
 reportWebVitals()
