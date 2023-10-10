@@ -1,68 +1,55 @@
 import update from 'immutability-helper'
 import { useCallback, useState } from "react"
 import { Card } from "./Card"
+import { Item } from '../swipe/Item'
+import { useItems } from "../ItemsProvider"
+import cx from "../../helpers/cx"
+import { commonClassName } from "../Layout"
 
 export interface Item {
-    id: number
-    text: string
+    id: string
+    title: string
+    sum: number
 }
 
 export interface ContainerState {
     cards: Item[]
 }
 
+interface DndProps {
+    items: Item[]
+}
+
 export function Dnd() {
-    const [cards, setCards] = useState([
-        {
-            id: 1,
-            text: 'Write a cool JS library',
-        },
-        {
-            id: 2,
-            text: 'Make it generic enough',
-        },
-        {
-            id: 3,
-            text: 'Write README',
-        },
-        {
-            id: 4,
-            text: 'Create some examples',
-        },
-        {
-            id: 5,
-            text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)',
-        },
-        {
-            id: 6,
-            text: '???',
-        },
-        {
-            id: 7,
-            text: 'PROFIT',
-        },
-    ])
+    const [items, setItems] = useItems()
 
     const moveCard = useCallback(function (dragIndex: number, hoverIndex: number) {
-        setCards(function UpdateCards(prevCards: Item[]) {
-            return update(prevCards, {
+        setItems(function UpdateCards(prevCards: Item[]) {
+            const res = update(prevCards, {
                 $splice: [
                     [dragIndex, 1],
                     [hoverIndex, 0, prevCards[dragIndex] as Item],
                 ],
             })
+
+            localStorage.setItem("data", JSON.stringify(res))
+
+            return res
         })
-    }, [])
+    }, [setItems])
 
     return (
-        <div style={{ width: 400 }}>
-            {cards.map(function ({ id, text }, index) {
+        <div className={cx(commonClassName,
+            // "p-3 lg:px-0"
+        )}>
+            {items.map(function ({ id, title, sum }, index) {
                 return (
                     <Card
                         key={id}
                         index={index}
                         id={id}
-                        text={text}
+                        title={title}
+                        sum={sum}
                         moveCard={moveCard}
                     />
                 )

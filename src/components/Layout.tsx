@@ -76,9 +76,10 @@ export function Layout() {
         setAddFormVisible(false)
     }, [data, setData, setLoading, setAddFormVisible])
 
+    const [editMode, setEditMode] = useState(false)
+
     return (
         <>
-            <Header />
 
             {loading && (
                 <div className="py-20 text-center">
@@ -90,7 +91,8 @@ export function Layout() {
                 <ul className={cx("p-2 m-2", commonClassName)}>
                     {data.map(function DataMap({ id, title, sum }) {
                         return (
-                            <Row key={id} id={id} sum={sum} title={title} />
+                            <></>
+                            // <Row key={id} id={id} sum={sum} title={title} />
                         )
                     })}
                 </ul>

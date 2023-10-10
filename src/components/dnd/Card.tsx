@@ -1,7 +1,8 @@
 import type { Identifier, XYCoord } from 'dnd-core'
-import { useRef } from 'react'
+import { PropsWithChildren, useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import cx from "../../helpers/cx"
+import { Row } from "../Row"
 
 export const ItemTypes = {
     CARD: 'card',
@@ -9,8 +10,9 @@ export const ItemTypes = {
 
 export interface CardProps {
     id: any
-    text: string
+    title: string
     index: number
+    sum: number
     moveCard: (dragIndex: number, hoverIndex: number) => void
 }
 
@@ -20,7 +22,7 @@ interface DragItem {
     type: string
 }
 
-export function Card({ id, text, index, moveCard }: CardProps) {
+export function Card({ id, index, title, sum, moveCard }: CardProps) {
     const ref = useRef<HTMLDivElement>(null)
     const [{ handlerId }, drop] = useDrop<DragItem, void, { handlerId: Identifier | null }>({
         accept: ItemTypes.CARD,
@@ -78,7 +80,6 @@ export function Card({ id, text, index, moveCard }: CardProps) {
             item.index = hoverIndex
         },
     })
-
     const [{ isDragging }, drag] = useDrag({
         type: ItemTypes.CARD,
         item: () => {
@@ -92,13 +93,14 @@ export function Card({ id, text, index, moveCard }: CardProps) {
     drag(drop(ref))
 
     return (
-        <div ref={ref} data-handler-id={handlerId}
+        <Row
+            ref={ref} title={title} sum={sum}
             className={cx(
-                "border border-[var(--text-color)] cursor-move bg-[var(--background-color)] mb-2 p-2 rounded",
-                isDragging ? "opacity-0" : "opacity-100"
+                "select-none cursor-move",
+                "flex",
+                isDragging ? "opacity-0" : "opacity-100",
+                "with-drag"
             )}
-        >
-            {text}
-        </div>
+        />
     )
 }

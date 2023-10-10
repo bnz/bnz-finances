@@ -2,22 +2,19 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
-import { Layout } from "./components/Layout"
-// import { Dnd } from "./components/dnd/Dnd"
-// import { DndProvider } from 'react-dnd'
-// import { HTML5Backend } from 'react-dnd-html5-backend'
-
+import { App } from "./components/App"
+import { ItemsProvider } from "./components/ItemsProvider"
+import { TogglesProvider } from "./components/TogglesProvider"
 
 createRoot(
     document.getElementById('root') as HTMLElement,
 ).render(
     <StrictMode>
-        <Layout />
-        {/*<DndProvider backend={HTML5Backend}>*/}
-        {/*    <div className="p-5">*/}
-        {/*        <Dnd />*/}
-        {/*    </div>*/}
-        {/*</DndProvider>*/}
+        <ItemsProvider>
+            <TogglesProvider>
+                <App />
+            </TogglesProvider>
+        </ItemsProvider>
     </StrictMode>,
 )
 

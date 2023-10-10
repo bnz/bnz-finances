@@ -65,4 +65,13 @@ body {
         @apply focus:shadow-inner focus:outline-none;
     }
 
+    .with-drag {
+        @apply before:block before:w-2 before:mr-2;
+        @apply before:bg-[var(--background-color-alt)];
+    }
+
+
+}
+.swipeable-list {
+    height: auto !important;
 }
