@@ -1,15 +1,16 @@
 import update from 'immutability-helper'
 import { useCallback, useState } from "react"
-import { Card } from "./Card"
-import { Item } from '../swipe/Item'
+import { DndItem } from "./DndItem"
 import { useItems } from "../ItemsProvider"
 import cx from "../../helpers/cx"
-import { commonClassName } from "../Layout"
+
+import { commonClassName } from "../Header"
 
 export interface Item {
     id: string
     title: string
     sum: number
+    color: string | null
 }
 
 export interface ContainerState {
@@ -39,18 +40,17 @@ export function Dnd() {
     }, [setItems])
 
     return (
-        <div className={cx(commonClassName,
-            // "p-3 lg:px-0"
-        )}>
-            {items.map(function ({ id, title, sum }, index) {
+        <div className={commonClassName}>
+            {items.map(function ({ id, title, sum, color }, index) {
                 return (
-                    <Card
+                    <DndItem
                         key={id}
                         index={index}
                         id={id}
                         title={title}
                         sum={sum}
                         moveCard={moveCard}
+                        color={color}
                     />
                 )
             })}

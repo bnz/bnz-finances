@@ -1,13 +1,17 @@
 import cx from "../helpers/cx"
 import { Row } from "./Row"
-import { commonClassName } from "./Layout"
 import { useItems } from "./ItemsProvider"
+import { commonClassName } from "./Header"
 
 export function Footer() {
     const [items] = useItems()
 
+    if (items.length <= 0) {
+        return null
+    }
+
     return (
-        <Row title="Всего:"
+        <Row title="Всего:" color={null}
             sum={items.reduce(function (prev, { sum }) {
                 return prev + sum
             }, 0)}
@@ -15,7 +19,8 @@ export function Footer() {
             className={cx(
                 commonClassName,
                 "border-t-4",
-                "bg-[var(--background-color-alt)]"
+                "bg-[var(--background-color-alt)]",
+                "sticky bottom-0"
             )}
         />
     )

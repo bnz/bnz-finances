@@ -1,11 +1,8 @@
 import cx from "../helpers/cx"
-import { commonClassName } from "./Layout"
-import { useToggles } from "./TogglesProvider"
+
+export const commonClassName: string = "mx-auto lg:max-w-4xl"
 
 export function Header() {
-    const [editMode, , toggle] = useToggles("edit")
-    const [addNew, , toggleAddNew] = useToggles("addNew")
-
     return (
         <header
             className={cx(
@@ -14,9 +11,9 @@ export function Header() {
             )}
         >
             <h1 className="relative h-14">
-                    <span className="text-gradient font-thin text-3xl">
-                        Ю. <span className="text-xl ">и</span> Ю.
-                    </span>
+                <span className="text-gradient font-thin text-3xl">
+                    Ю. <span className="text-xl ">и</span> Ю.
+                </span>
                 <span className={cx(
                     "text-gradient",
                     "font-thin text-xs",
@@ -25,12 +22,6 @@ export function Header() {
                     финансы
                 </span>
             </h1>
-            <button className="absolute right-0 top-0 bottom-0 px-2" onClick={toggle}>
-                {editMode ? "Готово" : "Редак."}
-            </button>
-            <button className="absolute left-0 top-0 bottom-0 px-2" onClick={toggleAddNew}>
-                {addNew ? "Отмена" :"Добавить"}
-            </button>
         </header>
     )
 }

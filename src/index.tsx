@@ -10,11 +10,11 @@ createRoot(
     document.getElementById('root') as HTMLElement,
 ).render(
     <StrictMode>
-        <ItemsProvider>
-            <TogglesProvider>
+        <TogglesProvider>
+            <ItemsProvider>
                 <App />
-            </TogglesProvider>
-        </ItemsProvider>
+            </ItemsProvider>
+        </TogglesProvider>
     </StrictMode>,
 )
 

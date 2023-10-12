@@ -1,17 +1,18 @@
 import { SwipeableList, Type } from 'react-swipeable-list'
 import 'react-swipeable-list/dist/styles.css'
 import { useItems } from "../ItemsProvider"
-import { Item } from './Item'
-import { commonClassName } from "../Layout"
+import { SwipeItem } from './SwipeItem'
+
+import { commonClassName } from "../Header"
 
 export function Swipe() {
     const [items] = useItems()
 
     return (
         <SwipeableList type={Type.IOS} className={commonClassName}>
-            {items.map(function ({ id, title, sum }) {
+            {items.map(function ({ id, title, sum, color }) {
                 return (
-                    <Item key={id} id={id} title={title} sum={sum} />
+                    <SwipeItem key={id} itemId={id} title={title} sum={sum} color={color} />
                 )
             })}
         </SwipeableList>

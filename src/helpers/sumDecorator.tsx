@@ -1,4 +1,4 @@
-import { moneySymbol } from "../components/Layout"
+const moneySymbol = "€"
 
 export function sumDecorator(value: number) {
     const [a, b] = value.toFixed(2).split(".")

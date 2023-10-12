@@ -14,6 +14,7 @@ export interface CardProps {
     index: number
     sum: number
     moveCard: (dragIndex: number, hoverIndex: number) => void
+    color: string | null
 }
 
 interface DragItem {
@@ -22,7 +23,7 @@ interface DragItem {
     type: string
 }
 
-export function Card({ id, index, title, sum, moveCard }: CardProps) {
+export function DndItem({ id, index, title, sum, color, moveCard }: CardProps) {
     const ref = useRef<HTMLDivElement>(null)
     const [{ handlerId }, drop] = useDrop<DragItem, void, { handlerId: Identifier | null }>({
         accept: ItemTypes.CARD,
@@ -94,7 +95,7 @@ export function Card({ id, index, title, sum, moveCard }: CardProps) {
 
     return (
         <Row
-            ref={ref} title={title} sum={sum}
+            ref={ref} title={title} sum={sum} color={color}
             className={cx(
                 "select-none cursor-move",
                 "flex",

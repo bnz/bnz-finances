@@ -1,8 +1,15 @@
-import { Data } from "../components/Layout"
-
 const BIN_ID = "65129e8c0574da7622b080d3"
 const X_MASTER_KEY = "$2a$10$2D923FoCNR8T9GDGmzAzYenNKXCF3n3U8UlN3ghThWztuX7F0TOOS"
 const ROOT_URL = "https://api.jsonbin.io/v3/b/"
+
+export interface DataItem {
+    id: string
+    title: string
+    sum: number
+    color: string | null
+}
+
+export type Data = DataItem[]
 
 export async function fetch<T = Data>(
     method?: "GET" | "POST" | "PUT" | "DELETE",

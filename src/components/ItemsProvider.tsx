@@ -1,5 +1,7 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useState } from "react"
 import { Item } from "./dnd/Dnd"
+import { useToggles } from "./TogglesProvider"
+import { groupBy } from "../helpers/groupBy"
 
 export const ItemsContext = createContext<[
     Item[],
@@ -34,6 +36,28 @@ export function ItemsProvider({ children }: PropsWithChildren) {
 }
 
 export function useItems(): [Item[], Dispatch<SetStateAction<Item[]>>] {
-    return useContext(ItemsContext)
+    const [items, setItems] = useContext(ItemsContext)
+    const [sortByColors] = useToggles("sortByColors")
+    const [sortBySum] = useToggles("sortBySum")
+
+    if (sortByColors) {
+        return [
+            Array.from(groupBy(items, (item) => item.color)).map(function ([, item]) {
+                return item
+            }).flat(),
+            setItems,
+        ]
+    }
+
+    if (sortBySum) {
+        return [
+            Array.from(items).sort(function (a, b) {
+                return b.sum - a.sum
+            }),
+            setItems,
+        ]
+    }
+
+    return [items, setItems]
 }
 

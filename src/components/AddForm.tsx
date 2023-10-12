@@ -1,45 +1,28 @@
-import { FormEvent, useCallback, useState } from "react"
-import { commonClassName, DataItem } from "./Layout"
-import { makeId } from "../helpers/makeId"
-import cx from "../helpers/cx"
+import { Form } from "./Form"
+import { useItems } from "./ItemsProvider"
+import { useToggles } from "./TogglesProvider"
 
-interface AddFormProps {
-    setData(item: DataItem): void
-    onCancel(): void
-}
-
-export function AddForm({ setData, onCancel }: AddFormProps) {
-    const [title, setTitle] = useState("")
-    const [sum, setSum] = useState(0)
-    const onSubmit = useCallback(function OnSubmit(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        setData({ id: makeId(), title, sum })
-    }, [title, sum, setData])
+export function AddForm() {
+    const [items, saveItems] = useItems()
+    const [addNew, setAddNew, toggle] = useToggles("addNew")
 
     return (
         <>
-            <form className={cx("p-5 flex md:justify-end flex-col md:flex-row gap-3", commonClassName)} onSubmit={onSubmit}>
-                <input type="text" className="input" placeholder="название"
-                    autoFocus
-                    required
-                    defaultValue={title}
-                    onChange={function TitleOnChange(e) {
-                        setTitle(e.target.value)
+            {(addNew || items.length <= 0) && (
+                <Form
+                    setData={function (item) {
+                        saveItems(function (prevState) {
+                            const res = [...prevState, item]
+                            localStorage.setItem("data", JSON.stringify(res))
+                            return res
+                        })
+                        items.length <= 0 ? toggle() : setAddNew(false as any)
+                    }}
+                    {...items.length <= 0 ? {} : {
+                        onCancel: toggle,
                     }}
                 />
-                <input type="number" className="input" placeholder="сумма"
-                    defaultValue={sum}
-                    onChange={function SumOnChange(e) {
-                        setSum(Number(e.target.value))
-                    }}
-                />
-                <button type="submit" className="button">
-                    Добавить
-                </button>
-                <button type="button" className="button" onClick={onCancel}>
-                    Отмена
-                </button>
-            </form>
+            )}
         </>
     )
 }
