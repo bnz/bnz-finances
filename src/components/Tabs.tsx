@@ -23,7 +23,6 @@ function Tab({ typeOfItem, title }: { typeOfItem: TypeOfItem, title: string }) {
 
 export function Tabs() {
     const menu = useToggle("menu")
-    const [type, setType] = useToggles("type")
 
     return (
         <div className={cx("flex sticky z-10",
