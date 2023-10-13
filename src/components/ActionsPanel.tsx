@@ -4,15 +4,36 @@ import { AddItemButton } from "./buttons/AddItemButton"
 import { commonClassName } from "./Header"
 import { SortByColorsButton } from "./buttons/SortByColorsButton"
 import { SortBySumButton } from "./buttons/SortBySumButton"
+import { SortByFavouritesButton } from "./buttons/SortByFavouritesButton"
+import { SortByStrikeButton } from "./buttons/SortByStrikeButton"
+import { useToggle } from "./TogglesProvider"
 
-export function ActionsPanel() {
+export function ActionsPanelRenderer() {
+    const menu = useToggle("menu")
+
     return (
-        <div className={cx("h-14 my-3 flex", commonClassName)}>
+        <div className={cx(
+            "overflow-hidden transition-[height] flex",
+            commonClassName,
+            "sticky top-14 bg-[var(--background-color)] shadow z-20",
+            menu ? "h-20 py-3" : "h-0",
+        )}>
+            {menu && (
+                <ActionsPanel />
+            )}
+        </div>
+    )
+}
+
+function ActionsPanel() {
+    return (
+        <>
             <AddItemButton />
             <ReorderButton />
-            <div className="flex-1" />
+            <SortByStrikeButton />
+            <SortByFavouritesButton />
             <SortByColorsButton />
             <SortBySumButton />
-        </div>
+        </>
     )
 }

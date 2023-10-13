@@ -1,30 +1,31 @@
 import { SwipeAction } from "react-swipeable-list"
 import { useCallback } from "react"
-import { Item as ItemType } from "../dnd/Dnd"
 import { saveItems, useItems } from "../ItemsProvider"
+import { Item as ItemType } from "../dnd/Dnd"
 
-interface DeleteButtonProps {
+interface StrikeButtonProps {
     id: string
 }
 
-export function DeleteButton({ id: itemId }: DeleteButtonProps) {
-    const [, setItems] = useItems()
+export function StrikeButton({ id: itemId }: StrikeButtonProps) {
+    const [, save] = useItems()
+
     const onClick = useCallback(function () {
-        setItems(function (prevState) {
+        save(function (prevState) {
             const copy: ItemType[] = JSON.parse(JSON.stringify(prevState))
             const index = copy.findIndex(function ({ id }) {
                 return id === itemId
             })
-            copy.splice(index, 1)
+            copy[index].strike = !copy[index].strike
             saveItems(copy)
             return copy
         })
-    }, [setItems, itemId])
+    }, [save, itemId])
 
     return (
-        <SwipeAction destructive={true} onClick={onClick} Tag="div">
-            <button className="bg-red-500 text-white font-bold px-2">
-                Удалить
+        <SwipeAction Tag="div" onClick={onClick}>
+            <button className="!h-full bg-red-200 dark:bg-red-800 before:!top-0 icon strike w-24">
+                Зачеркнуть
             </button>
         </SwipeAction>
     )

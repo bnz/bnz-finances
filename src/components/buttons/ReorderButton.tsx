@@ -1,19 +1,19 @@
-import { useToggle, useToggles, useToggleValues } from "../TogglesProvider"
+import { useToggles, useToggleValues } from "../TogglesProvider"
 import { useItems } from "../ItemsProvider"
 import cx from "../../helpers/cx"
 
 export function ReorderButton() {
     const [items] = useItems()
-    const [editMode, , toggle] = useToggles("reorder")
-    const { sortByColors, sortBySum } = useToggleValues()
+    const [reorder, , toggle] = useToggles("reorder")
+    const { sortByColors, sortBySum, addNew, edit, sortByFavourites, sortByStrike } = useToggleValues()
 
     return (
         <button
-            disabled={items.length <= 1 || !!sortByColors || !!sortBySum}
-            className={cx("icon", editMode ? "confirm" : "reorder")}
+            disabled={items.length <= 1 || !!sortByColors || !!sortBySum || !!addNew || !!edit || !!sortByFavourites || !!sortByStrike}
+            className={cx("icon", reorder ? "confirm" : "reorder")}
             onClick={toggle}
         >
-            {editMode ? "Готово" : "Редак."}
+            {reorder ? "Готово" : "Редак."}
         </button>
     )
 }

@@ -10,9 +10,9 @@ export function Swipe() {
 
     return (
         <SwipeableList type={Type.IOS} className={commonClassName}>
-            {items.map(function ({ id, title, sum, color }) {
+            {items.map(function ({ id }) {
                 return (
-                    <SwipeItem key={id} itemId={id} title={title} sum={sum} color={color} />
+                    <SwipeItem key={id} itemId={id} />
                 )
             })}
         </SwipeableList>

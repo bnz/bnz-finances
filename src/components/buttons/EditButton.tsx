@@ -5,10 +5,9 @@ import { useToggles } from "../TogglesProvider"
 
 interface EditButtonProps {
     id: string
-    title: string
 }
 
-export function EditButton({ id: itemId, title }: EditButtonProps) {
+export function EditButton({ id: itemId }: EditButtonProps) {
     const [, setEdit] = useToggles("edit")
 
     const onClick = useCallback(function () {
@@ -23,7 +22,7 @@ export function EditButton({ id: itemId, title }: EditButtonProps) {
                 "bg-blue-500 text-white font-bold",
                 "px-2",
             )}>
-                {title}
+                Редак.
             </button>
         </SwipeAction>
     )

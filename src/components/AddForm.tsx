@@ -1,19 +1,22 @@
 import { Form } from "./Form"
-import { useItems } from "./ItemsProvider"
-import { useToggles } from "./TogglesProvider"
+import { saveItems, useItems } from "./ItemsProvider"
+import { useToggle, useToggles } from "./TogglesProvider"
+import { TypeOfItem } from "./dnd/Dnd"
 
 export function AddForm() {
-    const [items, saveItems] = useItems()
+    const [items, setItems] = useItems()
     const [addNew, setAddNew, toggle] = useToggles("addNew")
+    const type = useToggle("type")
 
     return (
         <>
             {(addNew || items.length <= 0) && (
                 <Form
                     setData={function (item) {
-                        saveItems(function (prevState) {
+                        setItems(function (prevState) {
+                            item.type = type as TypeOfItem
                             const res = [...prevState, item]
-                            localStorage.setItem("data", JSON.stringify(res))
+                            saveItems(res)
                             return res
                         })
                         items.length <= 0 ? toggle() : setAddNew(false as any)

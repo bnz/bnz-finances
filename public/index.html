@@ -4,10 +4,23 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="rgba(57, 57, 61, 1)" />
     <meta name="description" content="bnz finances" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script type="text/javascript">
+        (function () {
+            const MediaQueryList = window.matchMedia("(prefers-color-scheme: dark)")
+            const metaTag = document.querySelector('meta[name="theme-color"]')
+            function fn(matches) {
+                metaTag.setAttribute("content", matches ? "rgba(57, 57, 61, 1)" : "rgba(247, 248, 251, 1)");
+            }
+            fn(MediaQueryList.matches)
+            MediaQueryList.addEventListener("change", function (event) {
+                fn(event.matches)
+            })
+        })()
+    </script>
     <title>bnz finances</title>
 </head>
 <body>

@@ -1,24 +1,23 @@
 import update from 'immutability-helper'
-import { useCallback, useState } from "react"
+import { useCallback } from "react"
 import { DndItem } from "./DndItem"
-import { useItems } from "../ItemsProvider"
-import cx from "../../helpers/cx"
+import { saveItems, useItems } from "../ItemsProvider"
 
 import { commonClassName } from "../Header"
 
+export enum TypeOfItem {
+    income,
+    outcome,
+}
+
 export interface Item {
     id: string
+    type?: TypeOfItem
     title: string
     sum: number
     color: string | null
-}
-
-export interface ContainerState {
-    cards: Item[]
-}
-
-interface DndProps {
-    items: Item[]
+    star?: boolean
+    strike?: boolean
 }
 
 export function Dnd() {
@@ -32,9 +31,7 @@ export function Dnd() {
                     [hoverIndex, 0, prevCards[dragIndex] as Item],
                 ],
             })
-
-            localStorage.setItem("data", JSON.stringify(res))
-
+            saveItems(res)
             return res
         })
     }, [setItems])
@@ -43,15 +40,7 @@ export function Dnd() {
         <div className={commonClassName}>
             {items.map(function ({ id, title, sum, color }, index) {
                 return (
-                    <DndItem
-                        key={id}
-                        index={index}
-                        id={id}
-                        title={title}
-                        sum={sum}
-                        moveCard={moveCard}
-                        color={color}
-                    />
+                    <DndItem key={id} index={index} id={id} moveCard={moveCard} />
                 )
             })}
         </div>

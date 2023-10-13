@@ -12,7 +12,7 @@ export function AddItemButton() {
             className={cx("icon", addNew ? "cancel" : "add")}
             onClick={toggle}
         >
-            {addNew ? "Отмена" : "Добавить"}
+            {addNew ? "Отмена" : "Новый"}
         </button>
     )
 }

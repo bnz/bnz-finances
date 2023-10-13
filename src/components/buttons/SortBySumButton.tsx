@@ -1,15 +1,16 @@
 import cx from "../../helpers/cx"
 import { useToggles } from "../TogglesProvider"
+import { selected } from "./SortByColorsButton"
 
 export function SortBySumButton() {
-    const [sortBySum, , toggleSortBySum] = useToggles("sortBySum")
+    const [value, , toggle] = useToggles("sortBySum")
 
     return (
         <button
-            className={cx("rounded icon sort1", !!sortBySum && "shadow-inner bg-[var(--background-color-alt)]")}
-            onClick={toggleSortBySum}
+            className={cx("rounded icon sort1", !!value && selected)}
+            onClick={toggle}
         >
-            По сумме
+            Сум.
         </button>
     )
 }

@@ -3,15 +3,21 @@ import { makeId } from "../helpers/makeId"
 import cx from "../helpers/cx"
 import { commonClassName } from "./Header"
 import { DataItem } from "../helpers/fetch"
+import { useToggle } from "./TogglesProvider"
+import { TypeOfItem } from "./dnd/Dnd"
+
+interface DefaultValues {
+    title: string
+    sum: number
+    color: string | null
+    star?: boolean
+    strike?: boolean
+}
 
 interface AddFormProps {
     setData(item: DataItem): void
     onCancel?(): void
-    defaultValues?: {
-        title: string
-        sum: number
-        color: string | null
-    }
+    defaultValues?: DefaultValues
 }
 
 const colors = [
@@ -23,35 +29,83 @@ const colors = [
 ]
 
 export function Form({ setData, onCancel, defaultValues }: AddFormProps) {
-    const [title, setTitle] = useState(defaultValues?.title || "")
-    const [sum, setSum] = useState(defaultValues?.sum || 0)
-    const [color, setColor] = useState<string | null>(defaultValues?.color || null)
+    const type = useToggle("type")
+
+    const [{ title, sum, color, strike, star }, setTempData] = useState<DefaultValues>({
+        title: defaultValues?.title || "",
+        sum: defaultValues?.sum || 0,
+        color: defaultValues?.color || null,
+        star: defaultValues?.star || false,
+        strike: defaultValues?.strike || false,
+    })
 
     const onSubmit = useCallback(function OnSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        setData({ id: makeId(), title, sum, color })
-    }, [title, sum, setData, color])
+        setData({ id: makeId(), title, sum, color, star, strike })
+    }, [title, sum, setData, color, star, strike])
+
+    const bgClassName = type === TypeOfItem.income
+        ? "bg-[var(--form-background-income)]"
+        : "bg-[var(--form-background-outcome)]"
 
     return (
         <>
             <div className={cx(
-                "px-5 pt-3 bg-[var(--form-background)]",
+                "px-5 pt-3 flex gap-3",
+                bgClassName,
                 commonClassName,
-                "flex gap-3",
                 defaultValues ? "" : "rounded-t mt-2",
             )}>
                 {colors.map(function (colorBg, index) {
                     return (
-                        <button key={index} className={cx(
-                            "w-10 h-10 relative rounded",
-                            "after:absolute after:inset-0 after:rounded",
-                            colorBg ? colorBg : "",
-                            color === colorBg && "outline outline-2",
-                        )} onClick={function () {
-                            setColor(colorBg)
-                        }} />
+                        <button
+                            key={index}
+                            onClick={function () {
+                                setTempData(function (prevState) {
+                                    return { ...prevState, color: colorBg }
+                                })
+                            }}
+                            className={cx(
+                                "w-10 h-10 relative rounded",
+                                "after:absolute after:inset-0 after:rounded",
+                                color === colorBg && "outline outline-2",
+                                colorBg ? colorBg : cx(
+                                    "bg-center bg-no-repeat",
+                                    "bg-[url('../public/assets/cancel.svg')]",
+                                    "dark:bg-[url('../public/assets/cancel-dark.svg')]",
+                                ),
+                            )}
+                        />
                     )
                 })}
+                <button
+                    className={cx(
+                        "ml-auto",
+                        "w-10 h-10",
+                        "icon strike",
+                        "before:w-2/3 before:h-full before:top-0",
+                        "rounded",
+                        strike && "outline",
+                    )}
+                    onClick={function () {
+                        setTempData(function (prevState) {
+                            return { ...prevState, strike: !prevState.strike }
+                        })
+                    }}
+                />
+                <button
+                    className={cx(
+                        "w-10 h-10",
+                        "icon",
+                        star ? "star-yellow" : "star-empty",
+                        "before:w-2/3 before:h-full before:top-0",
+                    )}
+                    onClick={function () {
+                        setTempData(function (prevState) {
+                            return { ...prevState, star: !prevState.star }
+                        })
+                    }}
+                />
             </div>
             <form
                 onSubmit={onSubmit}
@@ -60,7 +114,7 @@ export function Form({ setData, onCancel, defaultValues }: AddFormProps) {
                     "md:flex md:justify-end md:flex-row",
                     "p-5 gap-3",
                     commonClassName,
-                    "bg-[var(--form-background)]",
+                    bgClassName,
                     "rounded-b mb-2",
                 )}
             >
@@ -68,8 +122,10 @@ export function Form({ setData, onCancel, defaultValues }: AddFormProps) {
                     autoFocus
                     required
                     defaultValue={title}
-                    onChange={function TitleOnChange(e) {
-                        setTitle(e.target.value)
+                    onChange={function (e) {
+                        setTempData(function (prevState) {
+                            return { ...prevState, title: e.target.value }
+                        })
                     }}
                 />
                 <input type="number" className="input col-span-2" placeholder="сумма"
@@ -77,8 +133,10 @@ export function Form({ setData, onCancel, defaultValues }: AddFormProps) {
                     step={0.01}
                     max={100000.00}
                     defaultValue={sum}
-                    onChange={function SumOnChange(e) {
-                        setSum(Number(e.target.value))
+                    onChange={function (e) {
+                        setTempData(function (prevState) {
+                            return { ...prevState, sum: Number(e.target.value) }
+                        })
                     }}
                 />
                 <button type="submit" className="button order-2 md:order-1">

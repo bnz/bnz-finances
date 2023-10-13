@@ -1,12 +1,17 @@
+import { TypeOfItem } from "../components/dnd/Dnd"
+
 const BIN_ID = "65129e8c0574da7622b080d3"
 const X_MASTER_KEY = "$2a$10$2D923FoCNR8T9GDGmzAzYenNKXCF3n3U8UlN3ghThWztuX7F0TOOS"
 const ROOT_URL = "https://api.jsonbin.io/v3/b/"
 
 export interface DataItem {
     id: string
+    type?: TypeOfItem
     title: string
     sum: number
     color: string | null
+    star?: boolean
+    strike?: boolean
 }
 
 export type Data = DataItem[]

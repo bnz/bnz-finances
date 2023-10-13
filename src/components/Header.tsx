@@ -1,4 +1,5 @@
 import cx from "../helpers/cx"
+import { MenuButton } from "./buttons/MenuButton"
 
 export const commonClassName: string = "mx-auto lg:max-w-4xl"
 
@@ -6,7 +7,7 @@ export function Header() {
     return (
         <header
             className={cx(
-                "z-10 sticky top-0 select-none text-center bg-[var(--background-color)] shadow h-14",
+                "z-20 sticky top-0 select-none text-center bg-[var(--background-color)] shadow h-14",
                 commonClassName,
             )}
         >
@@ -22,6 +23,7 @@ export function Header() {
                     финансы
                 </span>
             </h1>
+            <MenuButton />
         </header>
     )
 }

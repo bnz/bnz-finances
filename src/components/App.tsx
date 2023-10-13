@@ -4,9 +4,10 @@ import { HTML5Backend } from "react-dnd-html5-backend"
 import { Dnd } from "./dnd/Dnd"
 import { Swipe } from "./swipe/Swipe"
 import { Footer } from "./Footer"
-import { useToggle, useToggles } from "./TogglesProvider"
-import { ActionsPanel } from "./ActionsPanel"
+import { useToggle } from "./TogglesProvider"
+import { ActionsPanelRenderer } from "./ActionsPanel"
 import { AddForm } from "./AddForm"
+import { Tabs } from "./Tabs"
 
 // useEffect(() => {
 //     setLoading(true)
@@ -27,7 +28,9 @@ export function App() {
     return (
         <>
             <Header />
-            <ActionsPanel />
+            <ActionsPanelRenderer />
+            <Tabs />
+            <div className="h-5" />
             <AddForm />
             {reorder ? (
                 <DndProvider backend={HTML5Backend}>
@@ -36,6 +39,7 @@ export function App() {
             ) : (
                 <Swipe />
             )}
+            <div className="h-5" />
             <Footer />
         </>
     )
