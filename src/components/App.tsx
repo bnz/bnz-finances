@@ -8,6 +8,7 @@ import { useToggle } from "./TogglesProvider"
 import { ActionsPanelRenderer } from "./ActionsPanel"
 import { AddForm } from "./AddForm"
 import { Tabs } from "./Tabs"
+import { MenuButton } from './buttons/MenuButton';
 
 // useEffect(() => {
 //     setLoading(true)
@@ -27,7 +28,9 @@ export function App() {
 
     return (
         <>
-            <Header />
+            <Header>
+                <MenuButton />
+            </Header>
             <ActionsPanelRenderer />
             <Tabs />
             <div className="h-5" />

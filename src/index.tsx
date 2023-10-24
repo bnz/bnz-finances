@@ -2,19 +2,13 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
-import { App } from "./components/App"
-import { ItemsProvider } from "./components/ItemsProvider"
-import { TogglesProvider } from "./components/TogglesProvider"
+import { StartPage } from './components/StartPage';
 
 createRoot(
     document.getElementById('root') as HTMLElement,
 ).render(
     <StrictMode>
-        <TogglesProvider>
-            <ItemsProvider>
-                <App />
-            </ItemsProvider>
-        </TogglesProvider>
+        <StartPage />
     </StrictMode>,
 )
 

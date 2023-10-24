@@ -1,9 +1,10 @@
 import cx from "../helpers/cx"
-import { MenuButton } from "./buttons/MenuButton"
+import { PropsWithChildren } from 'react';
+import { LogoutButton } from './buttons/LogoutButton';
 
 export const commonClassName: string = "mx-auto lg:max-w-4xl"
 
-export function Header() {
+export function Header({ children }: PropsWithChildren) {
     return (
         <header
             className={cx(
@@ -23,7 +24,8 @@ export function Header() {
                     финансы
                 </span>
             </h1>
-            <MenuButton />
+            {children}
+            <LogoutButton />
         </header>
     )
 }

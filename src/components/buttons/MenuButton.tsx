@@ -6,7 +6,7 @@ export function MenuButton() {
 
     return (
         <button onClick={toggle} className={cx(
-            "absolute right-0 top-0 bottom-0 !p-0 !m-0",
+            "absolute left-0 top-0 bottom-0 !p-0 !m-0",
             "icon",
             menu ? "cancel" : "menu",
             "before:top-0 before:bottom-0 before:h-auto",
