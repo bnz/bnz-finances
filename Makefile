@@ -17,7 +17,7 @@ clean:
 build: node_modules
 	@yarn build
 
-deploy: build clean
+deploy: build
 	@echo j2.bonez.me > ./build/CNAME
 	@./node_modules/.bin/gh-pages -d build
 .PHONY:deploy
