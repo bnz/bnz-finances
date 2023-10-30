@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { isLogged, storageKey } from '../Passcode';
+import { useEffect, useState } from 'react'
+import { isLogged, storageKey } from '../Passcode'
+import cx from "../../helpers/cx"
 
 export function LogoutButton() {
     const [visible, setVisible] = useState(false)
@@ -12,10 +13,15 @@ export function LogoutButton() {
     }
 
     return (
-        <button className="absolute top-0 bottom-0 right-0" onClick={function () {
-            localStorage.removeItem(storageKey)
-        }}>
-            logout
-        </button>
+        <button
+            className={cx(
+                "absolute top-0 bottom-0 right-0",
+                "icon logout before:top-1/2 before:-translate-y-1/2",
+            )}
+            onClick={function () {
+                localStorage.removeItem(storageKey)
+                window.location.reload()
+            }}
+        />
     )
 }

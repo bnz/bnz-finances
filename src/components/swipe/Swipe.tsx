@@ -2,18 +2,23 @@ import { SwipeableList, Type } from 'react-swipeable-list'
 import 'react-swipeable-list/dist/styles.css'
 import { useItems } from "../ItemsProvider"
 import { SwipeItem } from './SwipeItem'
-
 import { commonClassName } from "../Header"
-import { useToggle } from '../TogglesProvider';
+import { useToggleValues } from '../TogglesProvider'
 
 export function Swipe() {
     const [items] = useItems()
-    const addNew = useToggle("addNew")
+    const { addNew, sortByFavourites } = useToggleValues()
 
     if (items.length === 0 && !addNew) {
         return (
             <div className="text-center py-4">
-                пусто
+                {sortByFavourites ? (
+                    <div className="icon star-yellow mx-auto whitespace-nowrap">
+                        в избранном ничего нет
+                    </div>
+                ) : (
+                    <>пусто</>
+                )}
             </div>
         )
     }

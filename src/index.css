@@ -147,6 +147,11 @@ body {
         @apply before:bg-[url('../public/assets/menu.svg')];
         @apply dark:before:bg-[url('../public/assets/menu-dark.svg')];
     }
+
+    .icon.logout {
+        @apply before:bg-[url('../public/assets/logout.svg')];
+        @apply dark:before:bg-[url('../public/assets/logout-dark.svg')];
+    }
 }
 .swipeable-list {
     height: auto !important;
