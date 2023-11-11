@@ -45,8 +45,8 @@ export function Form({ setData, onCancel, defaultValues }: AddFormProps) {
     }, [title, sum, setData, color, star, strike])
 
     const bgClassName = type === TypeOfItem.income
-        ? "bg-[var(--form-background-income)]"
-        : "bg-[var(--form-background-outcome)]"
+        ? "bg-[--form-background-income]"
+        : "bg-[--form-background-outcome]"
 
     return (
         <>

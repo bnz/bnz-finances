@@ -2,13 +2,13 @@ import cx from "../helpers/cx"
 import { PropsWithChildren } from 'react';
 import { LogoutButton } from './buttons/LogoutButton';
 
-export const commonClassName: string = "mx-auto lg:max-w-4xl"
+export const commonClassName: string = "md:mx-auto lg:max-w-4xl"
 
 export function Header({ children }: PropsWithChildren) {
     return (
         <header
             className={cx(
-                "z-20 sticky top-0 select-none text-center bg-[var(--background-color)] shadow h-14",
+                "z-20 sticky top-0 select-none text-center bg-[--background-color] shadow h-14",
                 commonClassName,
             )}
         >

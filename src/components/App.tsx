@@ -7,8 +7,10 @@ import { Footer } from "./Footer"
 import { useToggle } from "./TogglesProvider"
 import { ActionsPanelRenderer } from "./ActionsPanel"
 import { AddForm } from "./AddForm"
-import { Tabs } from "./Tabs"
-import { MenuButton } from './buttons/MenuButton';
+import { IncomeOutcomeSwitcher } from "./IncomeOutcomeSwitcher"
+import { MenuButton } from './buttons/MenuButton'
+import { Months } from "./Months"
+
 
 // useEffect(() => {
 //     setLoading(true)
@@ -32,7 +34,8 @@ export function App() {
                 <MenuButton />
             </Header>
             <ActionsPanelRenderer />
-            <Tabs />
+            <Months />
+            <IncomeOutcomeSwitcher />
             <div className="h-5" />
             <AddForm />
             {reorder ? (

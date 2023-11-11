@@ -1,7 +1,7 @@
 import cx from "../../helpers/cx"
 import { useToggles } from "../TogglesProvider"
 
-export const selected = "shadow-inner bg-[var(--background-color-alt)]"
+export const selected = "shadow-inner bg-[--background-color-alt]"
 
 export function SortByColorsButton() {
     const [sortByColors, , toggleSortByColors] = useToggles("sortByColors")

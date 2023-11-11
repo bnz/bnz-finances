@@ -15,7 +15,7 @@ export function ActionsPanelRenderer() {
         <div className={cx(
             "overflow-hidden transition-[height] flex",
             commonClassName,
-            "sticky top-14 bg-[var(--background-color)] shadow z-20",
+            "sticky top-14 bg-[--background-color] shadow z-20",
             menu ? "h-20 py-3" : "h-0",
         )}>
             {menu && (

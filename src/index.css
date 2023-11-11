@@ -61,19 +61,19 @@ body {
     }
 
     .button {
-        @apply px-3 py-1 border border-[var(--line-color)] rounded-xl shadow;
-        @apply bg-[var(--background-color)];
+        @apply px-3 py-1 border border-[--line-color] rounded-xl shadow;
+        @apply bg-[--background-color];
     }
 
     .input {
         @apply rounded py-1 px-2;
-        @apply bg-[var(--background-color-alt)];
+        @apply bg-[--background-color-alt];
         @apply focus:shadow-inner focus:outline-none;
     }
 
     .with-drag {
         @apply before:block before:w-2 before:mr-2;
-        @apply before:bg-[var(--background-color-alt)];
+        @apply before:bg-[--background-color-alt];
     }
 
     .icon {
@@ -91,7 +91,7 @@ body {
     button[disabled].icon {
         @apply relative;
         @apply after:absolute after:inset-0;
-        @apply after:bg-[var(--background-color)] after:opacity-75;
+        @apply after:bg-[--background-color] after:opacity-75;
     }
 
     .icon.cancel {
@@ -153,6 +153,7 @@ body {
         @apply dark:before:bg-[url('../public/assets/logout-dark.svg')];
     }
 }
+
 .swipeable-list {
     height: auto !important;
 }

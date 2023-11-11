@@ -38,10 +38,10 @@ export function SwipeItem({ itemId, ...props }: ItemProps) {
                     id={itemId}
                     className={cx("select-none",
                         editId === itemId && cx(
-                            "bg-[var(--form-background)] mt-2 rounded-t border-t-0",
+                            "bg-[--form-background] mt-2 rounded-t border-t-0",
                             (type as never as TypeOfItem) === TypeOfItem.income
-                                ? "bg-[var(--form-background-income)]"
-                                : "bg-[var(--form-background-outcome)]",
+                                ? "bg-[--form-background-income]"
+                                : "bg-[--form-background-outcome]",
                         ),
                     )}
                 />

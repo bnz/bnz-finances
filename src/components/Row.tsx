@@ -16,7 +16,7 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function ({ id, classNam
     return (
         <div ref={ref} className={cx(
             className,
-            "flex border-t border-[var(--line-color)] w-full pl-7 pr-2 py-2",
+            "flex border-t border-[--line-color] w-full pl-7 pr-2 py-2",
             "relative",
             "after:absolute after:top-0.5 after:left-0 after:bottom-0.5",
             "after:rounded-r",

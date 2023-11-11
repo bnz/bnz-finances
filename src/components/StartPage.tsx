@@ -7,11 +7,7 @@ const AppWithProviders = lazy(function () {
 
 export function StartPage() {
     const [auth, setAuth] = useState(false)
-
-    console.log(1, isLogged())
-
     useEffect(function () {
-        console.log(2, isLogged())
         setAuth(isLogged())
     }, [setAuth])
 
