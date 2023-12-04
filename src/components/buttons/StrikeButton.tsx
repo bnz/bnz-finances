@@ -11,15 +11,15 @@ export function StrikeButton({ id: itemId }: StrikeButtonProps) {
     const [, save] = useItems()
 
     const onClick = useCallback(function () {
-        save(function (prevState) {
-            const copy: ItemType[] = JSON.parse(JSON.stringify(prevState))
-            const index = copy.findIndex(function ({ id }) {
-                return id === itemId
-            })
-            copy[index].strike = !copy[index].strike
-            saveItems(copy)
-            return copy
-        })
+        // save(function (prevState) {
+        //     const copy: ItemType[] = JSON.parse(JSON.stringify(prevState))
+        //     const index = copy.findIndex(function ({ id }) {
+        //         return id === itemId
+        //     })
+        //     copy[index].strike = !copy[index].strike
+        //     saveItems(copy)
+        //     return copy
+        // })
     }, [save, itemId])
 
     return (

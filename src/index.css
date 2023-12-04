@@ -5,8 +5,11 @@
 :root {
     --background-color: rgba(247, 248, 251, 1);
     --background-color-alt: rgb(234, 234, 234);
+    --background-color-backdrop: rgba(247, 248, 251, .85);
     --text-color: rgba(0, 32, 51, 0.75);
-    --line-color: rgba(0, 32, 51, .05);
+    --text-color-alt: rgba(0, 32, 51, 0.25);
+    --line-color: rgba(0, 32, 51, 0.05);
+    --line-color-alt: rgba(0, 32, 51, 0.01);
     --form-background: rgba(234, 234, 234, 0.5);
 
     --form-background-income: rgba(0, 240, 0, 0.1);
@@ -17,8 +20,11 @@
     :root {
         --background-color: rgba(57, 57, 61, 1);
         --background-color-alt: rgba(103, 103, 110, 0.5);
+        --background-color-backdrop: rgba(57, 57, 61, .85);
         --text-color: rgba(255, 255, 255, 0.5);
+        --text-color-alt: rgba(255, 255, 255, 0.15);
         --line-color: rgba(255, 255, 255, 0.025);
+        --line-color-alt: rgba(255, 255, 255, 0.01);
         --form-background: rgba(103, 103, 110, 0.5);
     }
 }
@@ -54,6 +60,14 @@ body {
 
 @layer components {
 
+    .border-line {
+        @apply border-[--line-color];
+    }
+
+    .border-line-alt {
+        @apply border-[--line-color-alt];
+    }
+
     .text-gradient {
         @apply bg-[linear-gradient(to_right,orange,violet)];
         -webkit-background-clip: text;
@@ -61,19 +75,23 @@ body {
     }
 
     .button {
-        @apply px-3 py-1 border border-[--line-color] rounded-xl shadow;
-        @apply bg-[--background-color];
+        @apply px-3 py-1 border border-line rounded-xl shadow bg-main;
+        @apply active:shadow-inner;
+    }
+
+    .button[disabled] {
+        @apply text-[--text-color-alt];
     }
 
     .input {
         @apply rounded py-1 px-2;
-        @apply bg-[--background-color-alt];
+        @apply bg-main-alt;
         @apply focus:shadow-inner focus:outline-none;
     }
 
     .with-drag {
         @apply before:block before:w-2 before:mr-2;
-        @apply before:bg-[--background-color-alt];
+        @apply before:bg-main-alt;
     }
 
     .icon {
@@ -86,12 +104,6 @@ body {
         @apply before:bg-no-repeat before:bg-center before:bg-contain;
         @apply before:block before:w-2/5 before:h-2/3;
         @apply before:mx-auto;
-    }
-
-    button[disabled].icon {
-        @apply relative;
-        @apply after:absolute after:inset-0;
-        @apply after:bg-[--background-color] after:opacity-75;
     }
 
     .icon.cancel {
@@ -152,6 +164,41 @@ body {
         @apply before:bg-[url('../public/assets/logout.svg')];
         @apply dark:before:bg-[url('../public/assets/logout-dark.svg')];
     }
+
+    .icon.history {
+        @apply before:bg-[url('../public/assets/history.svg')];
+        @apply dark:before:bg-[url('../public/assets/history-dark.svg')];
+    }
+
+    .icon.arrowLeft {
+        @apply before:bg-[url('../public/assets/arrowLeft.svg')];
+        @apply dark:before:bg-[url('../public/assets/arrowLeft-dark.svg')];
+    }
+
+    .icon.arrowDown {
+        @apply before:bg-[url('../public/assets/arrowDown.svg')];
+        @apply dark:before:bg-[url('../public/assets/arrowDown-dark.svg')];
+    }
+
+    .icon.dots {
+        @apply before:bg-[url('../public/assets/dots.svg')];
+        @apply dark:before:bg-[url('../public/assets/dots-dark.svg')];
+    }
+
+    button[disabled].icon {
+        @apply relative;
+        @apply after:absolute after:inset-0;
+        @apply after:bg-main after:opacity-75;
+    }
+
+    select {
+        @apply rounded py-1 pl-2 pr-6 w-full;
+        @apply appearance-none;
+        @apply bg-main-alt bg-no-repeat bg-right;
+        @apply bg-[url('../public/assets/arrowDown.svg')];
+        @apply dark:bg-[url('../public/assets/arrowDown-dark.svg')];
+    }
+
 }
 
 .swipeable-list {

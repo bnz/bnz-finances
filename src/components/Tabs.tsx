@@ -1,19 +1,17 @@
 import cx from "../helpers/cx"
-import { useState } from "react"
+import { JSX, useMemo, useState } from "react"
 
 type Tab = Record<"title", string>
 
 type TabVariants = "contained" | "outlined" | "underline"
 
-interface TabsProps {
-    defaultSelected?: number
-    className?: string
-    onChange(index: number, tab: Tab): void
-    tabs: Tab[]
-    tabVariant?: TabVariants
-}
-
 const classesMap: Record<string, [width: string, beforeWidth: string, beforeLeft: string[]]> = {
+    "Infinity": ["w-full", "before:w-full", [
+        "before:left-0",
+    ]],
+    "100.00": ["w-full", "before:w-full", [
+        "before:left-0",
+    ]],
     "50.00": ["w-1/2", "before:w-1/2", [
         "before:left-0",
         "before:left-1/2",
@@ -36,46 +34,79 @@ const classesMap: Record<string, [width: string, beforeWidth: string, beforeLeft
         "before:left-[60%]",
         "before:left-[80%]",
     ]],
+    "16.67": ["w-1/6", "before:w-1/6", [
+        "before:left-0",
+        "before:left-[16.67%]",
+        "before:left-[33.34%]",
+        "before:left-[50%]",
+        "before:left-[66.68%]",
+        "before:left-[83.35%]",
+    ]],
 }
 
 const tabVariants: Record<TabVariants, string> = {
     outlined: "before:rounded before:border before:border-[--text-color]",
-    contained: "before:rounded before:bg-[--background-color-alt]",
+    contained: "before:rounded before:bg-main-alt",
     underline: "before:border-b-4 before:border-[--text-color]",
 }
 
-export function Tabs({ className, defaultSelected = 0, onChange, tabs, tabVariant = "contained" }: TabsProps) {
+export interface TabsProps {
+    defaultSelected?: number
+    className?: string
+    onChange(index: number, tab: Tab): void
+    tabs: Tab[]
+    tabVariant?: TabVariants
+    RenderTabFn?(props: { children: string, selected: boolean }): JSX.Element
+    adaptToMobiles?: boolean
+}
+
+export function Tabs({
+    className, defaultSelected = 0, onChange, tabs, tabVariant = "contained",
+    adaptToMobiles,
+    RenderTabFn = function ({ children }) {
+        return <>{children}</>
+    },
+}: TabsProps) {
     const [selected, setSelected] = useState(defaultSelected)
-    const [width, beforeWidth, beforeLeft] = classesMap[(100 / tabs.length).toFixed(2)]
+    const [width, beforeWidth, beforeLeft] = useMemo(function () {
+        return classesMap[(Math.round((100 / tabs.length || 1) * 100) / 100).toFixed(2)]
+    }, [tabs])
 
     return (
-        <div className={cx(
+        <ul className={cx(
+            adaptToMobiles ? "" : cx(
+                "flex",
+                "before:absolute",
+                "before:top-0",
+                "before:left-0",
+                "before:h-full",
+                "before:-z-0",
+                "before:transition-all",
+                "before:duration-200",
+                beforeWidth,
+                beforeLeft[selected],
+            ),
             "relative",
-            "flex",
-            "before:absolute",
-            "before:top-0",
-            "before:left-0",
-            "before:h-full",
-            "before:-z-0",
-            "before:transition-all",
-            beforeWidth,
-            beforeLeft[selected],
             tabVariants[tabVariant],
             className,
         )}>
             {tabs.map(function (tab, index) {
                 const { title } = tab
                 return (
-                    <button key={index} className={cx("relative", "rounded", width)}
+                    <li
+                        key={index}
+                        className={cx("cursor-pointer flex items-center justify-center relative rounded group/button", width)}
                         onClick={function () {
                             setSelected(index)
                             onChange(index, tab)
                         }}
                     >
-                        {title}
-                    </button>
+                        <RenderTabFn selected={selected === index}>
+                            {title}
+                        </RenderTabFn>
+                    </li>
                 )
             })}
-        </div>
+        </ul>
     )
 }

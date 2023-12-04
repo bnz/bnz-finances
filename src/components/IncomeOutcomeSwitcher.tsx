@@ -12,10 +12,8 @@ export function IncomeOutcomeSwitcher() {
             tabVariant="contained"
             className={cx(
                 commonClassName,
-                "bg-[--background-color]",
-                "sticky z-10",
+                "bg-main sticky z-10 h-12",
                 menu ? "top-[136px]" : "top-14",
-                "h-12",
             )}
             defaultSelected={type as number}
             tabs={[

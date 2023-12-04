@@ -14,22 +14,22 @@ export function EditForm({ id: itemId }: EditFormProps) {
     const [, setEdit] = useToggles("edit")
     const [, save] = useItems()
     const setData = useCallback(function (newData: DataItem) {
-        save(function (prevState) {
-            const copy: ItemType[] = JSON.parse(JSON.stringify(prevState))
-            const index = copy.findIndex(function ({ id }) {
-                return id === itemId
-            })
-            copy[index] = {
-                ...copy[index],
-                title: newData.title,
-                sum: newData.sum,
-                color: newData.color,
-                strike: newData.strike,
-                star: newData.star,
-            }
-            saveItems(copy)
-            return copy
-        })
+        // save(function (prevState) {
+        //     const copy: ItemType[] = JSON.parse(JSON.stringify(prevState))
+        //     const index = copy.findIndex(function ({ id }) {
+        //         return id === itemId
+        //     })
+        //     copy[index] = {
+        //         ...copy[index],
+        //         title: newData.title,
+        //         sum: newData.sum,
+        //         color: newData.color,
+        //         strike: newData.strike,
+        //         star: newData.star,
+        //     }
+        //     saveItems(copy)
+        //     return copy
+        // })
         // @ts-ignore
         setEdit(null)
     }, [save, itemId, setEdit])

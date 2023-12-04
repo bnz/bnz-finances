@@ -24,8 +24,8 @@ export function Footer() {
         <footer className={cx(
             "relative",
             commonClassName,
-            "border-t-4 border-[--line-color]",
-            "bg-[--background-color-alt]",
+            "border-t-4 border-line",
+            "bg-main-alt",
             "sticky bottom-0",
         )}>
             <div className="flex w-full pl-7 pr-2 py-2">
@@ -36,7 +36,7 @@ export function Footer() {
                     {sumDecorator(income)}
                 </code>
             </div>
-            <div className="flex border-t border-[--line-color] w-full pl-7 pr-2 py-2">
+            <div className="flex border-t border-line w-full pl-7 pr-2 py-2">
                 <div className="text-xl flex items-center">
                     Расходы:
                 </div>
@@ -44,7 +44,7 @@ export function Footer() {
                     {sumDecorator(outcome)}
                 </code>
             </div>
-            <div className="flex border-t border-[--line-color] w-full pl-7 pr-2 py-2">
+            <div className="flex border-t border-line w-full pl-7 pr-2 py-2">
                 <div className="text-xl flex items-center">
                 </div>
                 <code className="flex-1 text-xl text-right">

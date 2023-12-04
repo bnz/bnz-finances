@@ -1,5 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+
+import defaultTheme from "tailwindcss/defaultTheme"
+import colors from "tailwindcss/colors"
+
+export default {
     content: [
         "./src/**/*.{js,jsx,ts,tsx}",
     ],
@@ -20,6 +24,14 @@ module.exports = {
                 'fade-out': 'fadeOut 0.5s ease-in-out forwards',
             }
         },
+        colors: {
+            ...defaultTheme.colors({colors}),
+            main: "var(--background-color)",
+            "main-alt": "var(--background-color-alt)",
+            text: "var(--text-color)",
+            "text-alt": "var(--text-alt)",
+            backdrop: "var(--background-color-backdrop)",
+        }
     },
     plugins: [],
 }

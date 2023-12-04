@@ -13,13 +13,13 @@ export function AddForm() {
             {(addNew || items.length <= 0) && !sortByFavourites && !sortByStrike && (
                 <Form
                     setData={function (item) {
-                        setItems(function (prevState) {
-                            item.type = type as never as TypeOfItem
-                            const res = [...prevState, item]
-                            saveItems(res)
-                            setAddNew(false as any)
-                            return res
-                        })
+                        // setItems(function (prevState) {
+                        //     item.type = type as never as TypeOfItem
+                        //     const res = [...prevState, item]
+                        //     saveItems(res)
+                        //     setAddNew(false as any)
+                        //     return res
+                        // })
                     }}
                     {...items.length <= 0 ? {} : {
                         onCancel: toggle,

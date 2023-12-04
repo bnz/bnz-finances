@@ -46,9 +46,9 @@ export function SwipeItem({ itemId, ...props }: ItemProps) {
                     )}
                 />
             </SwipeableListItem>
-            {editId === itemId && (
-                <EditForm id={itemId} />
-            )}
+            {/*{editId === itemId && (*/}
+            {/*    <EditForm id={itemId} />*/}
+            {/*)}*/}
         </>
     )
 }

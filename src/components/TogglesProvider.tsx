@@ -1,7 +1,8 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useState } from "react"
+import type { Dispatch, PropsWithChildren, SetStateAction } from "react"
+import { createContext, useCallback, useContext, useState } from "react"
 import { TypeOfItem } from "./dnd/Dnd"
 
-interface TogglesInterface {
+export interface TogglesInterface {
     reorder: [boolean, Dispatch<SetStateAction<boolean>>, VoidFunction]
     addNew: [boolean, Dispatch<SetStateAction<boolean>>, VoidFunction]
     edit: [string | null, Dispatch<SetStateAction<string | null>>, VoidFunction]
@@ -11,6 +12,7 @@ interface TogglesInterface {
     sortByStrike: [boolean, Dispatch<SetStateAction<boolean>>, VoidFunction]
     menu: [boolean, Dispatch<SetStateAction<boolean>>, VoidFunction]
     type: [TypeOfItem, Dispatch<SetStateAction<TypeOfItem>>, VoidFunction]
+    activeMonth: [string, (value: string) => void]
 }
 
 export function noop() {
@@ -26,6 +28,7 @@ const defaultValue: TogglesInterface = {
     sortByStrike: [false, noop, noop],
     menu: [false, noop, noop],
     type: [TypeOfItem.outcome, noop, noop],
+    activeMonth: ["", noop],
 }
 
 export const TogglesContext = createContext<TogglesInterface>(defaultValue)
@@ -57,6 +60,7 @@ export function TogglesProvider({ children }: PropsWithChildren) {
     const [sortByStrike, setSortByStrike] = useState(saved.sortByStrike)
     const [menu, setMenu] = useState(saved.menu)
     const [type, setType] = useState(saved.type as never as TypeOfItem)
+    const [activeMonth, setActiveMonth] = useState(saved.activeMonth as never as string)
 
     const value: TogglesInterface = {
         reorder: [reorder, setReorder, useCallback(function () {
@@ -164,6 +168,13 @@ export function TogglesProvider({ children }: PropsWithChildren) {
                     return prevState === TypeOfItem.outcome ? TypeOfItem.income : TypeOfItem.outcome
                 })
             }, [setType]),
+        ],
+        activeMonth: [
+            activeMonth,
+            useCallback(function (activeMonth) {
+                setActiveMonth(activeMonth)
+                saveToggles({ activeMonth })
+            }, []),
         ],
     }
 

@@ -16,7 +16,7 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function ({ id, classNam
     return (
         <div ref={ref} className={cx(
             className,
-            "flex border-t border-[--line-color] w-full pl-7 pr-2 py-2",
+            "flex border-t border-line w-full pl-7 pr-2 py-2",
             "relative",
             "after:absolute after:top-0.5 after:left-0 after:bottom-0.5",
             "after:rounded-r",
@@ -31,10 +31,10 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function ({ id, classNam
                     "bg-contain bg-center bg-no-repeat",
                 )} />
             )}
-            <div className={cx("text-xl flex items-center", strike && "line-through")}>
+            <div className={cx("text-xl flex items-center", strike && "line-through italic text-alt")}>
                 {title}
             </div>
-            <code className={cx("flex-1 text-xl text-right", strike && "line-through")}>
+            <code className={cx("flex-1 text-xl text-right", strike && "line-through italic text-alt")}>
                 {sumDecorator(sum)}
             </code>
         </div>

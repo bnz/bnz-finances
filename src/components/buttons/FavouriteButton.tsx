@@ -13,15 +13,15 @@ export function FavouriteButton({ id: itemId }: FavouriteButtonProps) {
     const { star } = useItem(itemId)
 
     const onClick = useCallback(function () {
-        setItems(function (prevState) {
-            const copy: ItemType[] = JSON.parse(JSON.stringify(prevState))
-            const index = copy.findIndex(function ({ id }) {
-                return id === itemId
-            })
-            copy[index].star = !copy[index].star
-            saveItems(copy)
-            return copy
-        })
+        // setItems(function (prevState) {
+        //     const copy: ItemType[] = JSON.parse(JSON.stringify(prevState))
+        //     const index = copy.findIndex(function ({ id }) {
+        //         return id === itemId
+        //     })
+        //     copy[index].star = !copy[index].star
+        //     saveItems(copy)
+        //     return copy
+        // })
     }, [setItems, itemId])
 
     return (

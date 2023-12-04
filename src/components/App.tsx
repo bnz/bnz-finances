@@ -10,6 +10,7 @@ import { AddForm } from "./AddForm"
 import { IncomeOutcomeSwitcher } from "./IncomeOutcomeSwitcher"
 import { MenuButton } from './buttons/MenuButton'
 import { Months } from "./Months"
+import { Divider } from "./Divider"
 
 
 // useEffect(() => {
@@ -35,18 +36,18 @@ export function App() {
             </Header>
             <ActionsPanelRenderer />
             <Months />
-            <IncomeOutcomeSwitcher />
-            <div className="h-5" />
-            <AddForm />
-            {reorder ? (
-                <DndProvider backend={HTML5Backend}>
-                    <Dnd />
-                </DndProvider>
-            ) : (
-                <Swipe />
-            )}
-            <div className="h-5" />
-            <Footer />
+            {/*<IncomeOutcomeSwitcher />*/}
+            {/*<Divider />*/}
+            {/*<AddForm />*/}
+            {/*{reorder ? (*/}
+            {/*    <DndProvider backend={HTML5Backend}>*/}
+            {/*        <Dnd />*/}
+            {/*    </DndProvider>*/}
+            {/*) : (*/}
+            {/*    <Swipe />*/}
+            {/*)}*/}
+            {/*<Divider />*/}
+            {/*<Footer />*/}
         </>
     )
 }

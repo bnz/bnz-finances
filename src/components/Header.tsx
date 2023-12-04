@@ -8,7 +8,7 @@ export function Header({ children }: PropsWithChildren) {
     return (
         <header
             className={cx(
-                "z-20 sticky top-0 select-none text-center bg-[--background-color] shadow h-14",
+                "z-20 sticky top-0 select-none text-center bg-main shadow h-14",
                 commonClassName,
             )}
         >
